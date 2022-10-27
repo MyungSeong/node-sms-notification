@@ -34,16 +34,19 @@ app.use((err, req, res, next) => {
     if (err) {
         customLogger.error(`[GLOBAL ERROR] ${err.message}`);
 
-        if (NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
             console.log('====================================');
-            console.log(err.message);
-            // console.log(err);
+            console.log(err);
             console.log('====================================');
         }
     }
+
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('error', {
+        error: process.env.NODE_ENV !== 'production' ? err : '',
+        message: err.message,
+    });
 });
 
 module.exports = app;

@@ -1,9 +1,12 @@
 /**
  *
  */
-import { getCookie } from '@lib/Cookie';
+import fetch from 'node-fetch';
+
+import { getCookie } from './Cookie';
 
 export default class ApiManager {
+    headers = { 'Content-Type': 'application/json; charset=UTF-8' };
     /**
      *
      */
@@ -21,7 +24,7 @@ export default class ApiManager {
     setHeaders = (headers = {}) => {
         this.headers = {
             ...this.headers,
-            headers,
+            ...headers,
         };
     };
 
@@ -30,11 +33,10 @@ export default class ApiManager {
      */
     getHeaders = () => {
         this.headers = {
-            'Content-Type': 'application/json; charset=UTF-8',
+            ...this.headers,
             // 'Content-Type': 'application/json;',
             // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            // Authorization: `Bearer ${getCookie('X-AUTH-TOKEN')}`,
-            'X-CSRF-TOKEN': getCookie('X-CSRF-TOKEN'),
+            // Authorization: `Bearer ${getCookie('token')}`,
         };
         return this.headers;
     };
