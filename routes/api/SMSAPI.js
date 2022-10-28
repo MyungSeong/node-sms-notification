@@ -50,8 +50,7 @@ export const sendSMS = ({ id, files = [] }) => {
                 `POST ${smsURI.replace(
                     NAVER_API_URL,
                     '',
-                )}\n${Date.now()}\n${NAVER_API_SMS_ACCESS_KEY}
-            `,
+                )}\n${Date.now()}\n${NAVER_API_SMS_ACCESS_KEY}`,
                 NAVER_API_SMS_SECRET_KEY,
             )
             .toString(cryptoJS.enc.Base64);
